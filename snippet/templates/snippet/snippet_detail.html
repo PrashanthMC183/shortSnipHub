@@ -1,0 +1,26 @@
+<!-- snippet_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snippet Detail</title>
+</head>
+<body>
+    <h2>Snippet Detail</h2>
+    <p>Encrypted Content: {{ snippet.encrypted_content }}</p>
+
+    {% if decrypted_content %}
+        <p>Decrypted Content: {{ decrypted_content }}</p>
+    {% else %}
+        <form method="post" action="{% url 'snippet:snippet_detail' pk=snippet.pk %}">
+            {% csrf_token %}
+            <label for="key">Enter Secret Key:</label>
+            <input type="text" name="key" required>
+            <button type="submit">Decrypt Content</button>
+        </form>
+        {% if key_error %}
+            <p style="color: red;">Key does not match. Please try again.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

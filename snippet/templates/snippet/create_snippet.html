@@ -1,0 +1,16 @@
+<!-- create_snippet.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Snippet</title>
+</head>
+<body>
+    <h2>Create Snippet</h2>
+    <form method="post" action="{% url 'snippet:create_snippet' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Snippet</button>
+    </form>
+</body>
+</html>
